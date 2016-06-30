@@ -109,6 +109,10 @@
 						if(svPlaceholder){ // custom placeholder
 							$placeholder = svPlaceholder.clone();
 							$placeholder.removeClass('ng-hide');
+							$placeholder.css({
+								'height': svRect.height + 'px',
+								'width': svRect.width + 'px'
+							});
 						}
 						else{ // default placeholder
 							$placeholder = svOriginal.clone();
@@ -510,10 +514,9 @@
 			require: ['?^svPart', '?^svElement'],
 			link: function($scope, $element, $attrs, $ctrl){
 				$element.addClass('sv-placeholder').addClass('ng-hide');
-				if($ctrl[1])
-					$ctrl[1].placeholder = $element;
-				else if($ctrl[0])
-					$ctrl[0].placeholder = $element;
+				for (var i=0; i < $ctrl.length; i++) {
+					$ctrl[i].placeholder = $element;
+				}
 			}
 		};
 	});
